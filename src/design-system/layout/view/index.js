@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import tw from 'twin.macro'
 import styled from '@emotion/styled'
 import "./../../../assets/styles.css"
+import { UiContext } from '../../../common/context-layers/ui';
 
 const BackContainer = tw.div`bg-gray-100 font-sans leading-normal tracking-normal`
 const Container = tw.div`flex md:flex-row-reverse flex-wrap`
@@ -21,6 +22,8 @@ padding: 0;
 `
 
 export default function LayoutView(props) {
+    const uiContext = useContext(UiContext)
+
     return (<BackContainer>
             <Container>
 
@@ -31,6 +34,7 @@ export default function LayoutView(props) {
         </MainColumn>
 
         <SideBarColumn>
+
             <SideContainer>
                 <SideList>
                     <SideListItem>
@@ -50,9 +54,9 @@ export default function LayoutView(props) {
                         </SideListItemLink>
                     </SideListItem>
                     <SideListItem>
-                        <SideListItemLink>
-                            <SideListItemIcon /><SideListItemText>Link</SideListItemText>
-                        </SideListItemLink>
+                        <button className="text-white" onClick={()=>uiContext.setLanguage('pt-br')}>
+                            {uiContext.language}
+                        </button>
                     </SideListItem>
                 </SideList>
             </SideContainer>
