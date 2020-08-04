@@ -24,11 +24,6 @@ const routes = [
         path: "/location",
         sidebar: () => Location.sidebarItem('/'),
         component: Location.component
-    },
-    {
-        path: "/shoelaces",
-        sidebar: () => <p >shoelaces!</p>,
-        main: () => <p >Shoelaces</p>
     }
 ];
 
