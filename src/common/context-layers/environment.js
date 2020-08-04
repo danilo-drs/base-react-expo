@@ -4,7 +4,7 @@ const serializeAuth = (auth) => ({
     accessCache: (auth.accessCache || [])
 })
 
-const defaultEnvironmentData = {
+export const defaultEnvironmentData = {
     auth: {
         authenticated: false,
         accessCache: []
@@ -12,5 +12,5 @@ const defaultEnvironmentData = {
     setAuth: (auth) => this.auth = serializeAuth(auth)
 }
 
-export const EnvironmentContext = React.createContext(defaultEnvironmentData);
+export const EnvironmentContext = React.createContext();
 EnvironmentContext.displayName = 'environmentContextLayer'
