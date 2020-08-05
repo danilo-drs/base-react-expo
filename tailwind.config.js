@@ -1,8 +1,24 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blue: {
+          dark: '#202e78',
+        }
+      },
+    },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant, e }) {
+      addVariant('dark-theme', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`core-them${separator}${className}`)}:disabled`
+        })
+      })
+    })
+  ],
 }

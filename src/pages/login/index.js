@@ -1,32 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     BrowserRouter as Router,
     useHistory,
     useLocation
 } from "react-router-dom";
-
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-      fakeAuth.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-      fakeAuth.isAuthenticated = false;
-      setTimeout(cb, 100);
-    }
-  };
+import { EnvironmentContext } from "../../common/context-layers/environment";
 
 
-export default function LoginPage() {
+const component = function LoginPage() {
+    const environmentContext = useContext(EnvironmentContext)
+
     let history = useHistory();
     let location = useLocation();
 
     let { from } = location.state || { from: { pathname: "/" } };
     let login = () => {
-        fakeAuth.authenticate(() => {
-            history.replace(from);
-        });
+        history.replace(from);
+        environmentContext.setAuth({ authenticated: true })
     };
 
     return (
@@ -35,4 +25,10 @@ export default function LoginPage() {
             <button onClick={login}>Log in</button>
         </div>
     );
+}
+const sidebarItem = (props) => <Link to={props.path}>Login</Link>
+
+export const Login = {
+    component,
+    sidebarItem,
 }

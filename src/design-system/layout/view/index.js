@@ -21,25 +21,23 @@ list-style: none;
 padding: 0;
 `
 
-export default function LayoutView(props) {
+export default function LayoutView({ main, showSideBar }) {
     const uiContext = useContext(UiContext)
 
-    return (<BackContainer>
-            <Container>
-
+    const mainComponent = (
         <MainColumn>
             <MainContainer>
-                {props.main}
+                {main}
             </MainContainer>
         </MainColumn>
-
+    )
+    const sideBarComponent = showSideBar ? (
         <SideBarColumn>
-
             <SideContainer>
                 <SideList>
                     <SideListItem>
                         <SideListItemLink href="/">
-                            <SideListItemIcon/>
+                            <SideListItemIcon />
                             <SideListItemText>Originações</SideListItemText>
                         </SideListItemLink>
                     </SideListItem>
@@ -54,14 +52,20 @@ export default function LayoutView(props) {
                         </SideListItemLink>
                     </SideListItem>
                     <SideListItem>
-                        <button className="text-white" onClick={()=>uiContext.setLanguage('pt-br')}>
+                        <button className="text-white" onClick={() => uiContext.setLanguage('pt-br')}>
                             {uiContext.language}
                         </button>
                     </SideListItem>
                 </SideList>
             </SideContainer>
-        </SideBarColumn>
-    </Container>
+        </SideBarColumn>) : ''
+
+
+    return (<BackContainer>
+        <Container>
+            {mainComponent}
+            {sideBarComponent}
+        </Container>
     </BackContainer>)
 }
 

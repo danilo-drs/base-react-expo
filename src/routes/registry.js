@@ -7,7 +7,8 @@ console.log('Pages', Pages)
 
 import {
     Home,
-    Location
+    Location,
+    Login
 } from './../pages';
 
 console.log('Home', Home)
@@ -18,13 +19,20 @@ const routes = [
         path: "/",
         exact: true,
         sidebar: () => Home.sidebarItem('/'),
-        component: Home.component
+        component: Home.component,
+        authenticated: true
     },
     {
         path: "/location",
         sidebar: () => Location.sidebarItem('/'),
         component: Location.component,
         authenticated: true
+    },
+    {
+        path: "/login",
+        sidebar: () => Login.sidebarItem('/'),
+        component: Login.component,
+        authenticated: false
     }
 ];
 
