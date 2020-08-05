@@ -4,23 +4,22 @@ import { Router } from './src/routes/dep'
 
 import Layout from './src/design-system/layout'
 import { Registry, RouteList } from './src/routes/registry';
-import { UiContext, defaultUiData } from './src/common/context-layers/ui';
+import { UiContextLayer } from './src/common/context-layers/ui';
+import { EnvironmentContextLayer } from './src/common/context-layers/environment';
 
 export default function App() {
-  const [uiLayerData, setUiData] = useState(defaultUiData);
-  const setLanguage = (language) => setUiData({ ...setUiData, ...{ language } })
-  const uiContextValue = { uiLayerData, setLanguage };
 
   return (
-
-    <Router>
-      <UiContext.Provider value={uiContextValue}>
-        <Layout
-          navList={<RouteList></RouteList>}
-          main={<Registry></Registry>}
-        />
-      </UiContext.Provider>
-    </Router>
+    <EnvironmentContextLayer>
+      <Router>
+        <UiContextLayer>
+          <Layout
+            navList={<RouteList></RouteList>}
+            main={<Registry></Registry>}
+          />
+        </UiContextLayer>
+      </Router>
+    </EnvironmentContextLayer>
 
   );
 }

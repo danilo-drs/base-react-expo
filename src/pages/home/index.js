@@ -2,17 +2,19 @@ import React, { useContext } from 'react'
 import { Link } from './../../routes/dep'
 import HomeView from './view'
 import { UiContext } from '../../common/context-layers/ui'
+import { EnvironmentContext } from '../../common/context-layers/environment'
 
 
 const component = function Home(props) {
     const uiContext = useContext(UiContext)
-    console.log('uiContext', uiContext)
-    const { language } = (uiContext.uiLayerData || {})
-    const { setLanguage } = (uiContext || {})
+    const envContext = useContext(EnvironmentContext)
+    const { language, setLanguage } = (uiContext || {})
+
     return (
         <HomeView
             language={language}
             setLanguage={setLanguage}
+            envTest={envContext.envTest}
         />
     )
 }

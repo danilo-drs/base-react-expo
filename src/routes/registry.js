@@ -23,7 +23,8 @@ const routes = [
     {
         path: "/location",
         sidebar: () => Location.sidebarItem('/'),
-        component: Location.component
+        component: Location.component,
+        authenticated: true
     }
 ];
 
