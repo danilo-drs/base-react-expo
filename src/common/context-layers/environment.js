@@ -1,16 +1,22 @@
-import React from "react";
-const serializeAuth = (auth) => ({
-    authenticated: (auth.authenticated || false),
-    accessCache: (auth.accessCache || [])
-})
+import React, { useState } from 'react';
 
 const defaultEnvironmentData = {
-    auth: {
-        authenticated: false,
-        accessCache: []
-    },
-    setAuth: (auth) => this.auth = serializeAuth(auth)
+    authenticated: false,
+    envTest: 'this came from env layer',
+    accessCache: []
 }
 
-export const EnvironmentContext = React.createContext(defaultEnvironmentData);
+export const EnvironmentContext = React.createContext()
 EnvironmentContext.displayName = 'environmentContextLayer'
+
+export const EnvironmentContextLayer = (props) => {
+    const [environmentLayerData, setEnvironmentLayerData] = useState(defaultEnvironmentData)
+    const setAuth = (auth) => setEnvironmentLayerData({ ...environmentLayerData, ...auth })
+    const environmentContextValue = { ...environmentLayerData, setAuth }
+
+    return (
+        <EnvironmentContext.Provider value={environmentContextValue}>
+            {props.children}
+        </EnvironmentContext.Provider>
+    )
+}
