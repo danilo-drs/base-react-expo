@@ -3,11 +3,15 @@ import tw from 'twin.macro'
 import styled from '@emotion/styled'
 import "./../../../assets/styles.css"
 import { UiContext } from '../../../common/context-layers/ui';
+import {
+    BackContainer,
+    WrapContainer,
+    MainContainer,
+} from '../../containers';
 
-const BackContainer = tw.div`bg-gray-100 font-sans leading-normal tracking-normal`
-const Container = tw.div`flex md:flex-row-reverse flex-wrap`
-const MainColumn = tw.div`w-full md:w-4/5 bg-gray-100 md:h-screen `
-const MainContainer = tw.div` bg-gray-100 pt-16 px-6`
+const MainPlaceholder = tw.div`w-full md:w-4/5 md:h-screen`
+const MainPlaceholderContainer = ({ children }) => (<MainPlaceholder><MainContainer>{children}</MainContainer></MainPlaceholder>)
+
 const SideBarColumn = tw.div`w-full md:w-1/6 bg-gray-900 px-2 text-center fixed bottom-0 md:pt-8 md:top-0 md:left-0 h-16 md:h-screen `
 const SideContainer = tw.div`md:relative md:w-5/6 mx-auto lg:float-left lg:px-6`
 const SideListBase = tw.ul`flex flex-row md:flex-col text-center md:text-left`
@@ -25,11 +29,9 @@ export default function LayoutView({ main, showSideBar }) {
     const uiContext = useContext(UiContext)
 
     const mainComponent = (
-        <MainColumn>
-            <MainContainer>
-                {main}
-            </MainContainer>
-        </MainColumn>
+        <MainPlaceholderContainer>
+            {main}
+        </MainPlaceholderContainer>
     )
     const sideBarComponent = showSideBar ? (
         <SideBarColumn>
@@ -62,10 +64,10 @@ export default function LayoutView({ main, showSideBar }) {
 
 
     return (<BackContainer>
-        <Container>
+        <WrapContainer>
             {mainComponent}
             {sideBarComponent}
-        </Container>
+        </WrapContainer>
     </BackContainer>)
 }
 

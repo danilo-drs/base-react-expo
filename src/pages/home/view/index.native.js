@@ -1,21 +1,22 @@
 import React from 'react'
 import { View, Button, Text } from 'native-base';
+import { Link } from 'react-router-dom';
+import { SimpleButton } from '../../../design-system/buttons';
 
 export default function HomeView({ setLanguage, language, envTest }) {
     return (
         <View>
             <Button onPress={() => setLanguage('en-us')}>
                 <Text>
-                    HOME - {language}  - {envTest}
+                    {language}  - {envTest}
                 </Text>
             </Button>
 
-            <Button onPress={() => setLanguage('pt-br')}>
+            <SimpleButton onPress={() => setLanguage('pt-br')}>
                 <Text>
-                    HOME - {language}  - {envTest}
+                    {language}  - {envTest}
                 </Text>
-
-            </Button>
+            </SimpleButton>
         </View>
     )
 }

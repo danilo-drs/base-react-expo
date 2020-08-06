@@ -14,7 +14,7 @@ const component = function Home(props) {
         <HomeView
             language={language}
             setLanguage={setLanguage}
-            envTest={envContext.envTest}
+            envTest={envContext.authenticated ? 'true' : 'false'}
         />
     )
 }

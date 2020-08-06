@@ -4,11 +4,6 @@ module.exports = {
   purge: [],
   theme: {
     extend: {
-      colors: {
-        blue: {
-          dark: '#202e78',
-        }
-      },
     },
   },
   variants: {},

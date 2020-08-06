@@ -10,6 +10,7 @@ import {
     Location,
     Login
 } from './../pages';
+import { AuthRoute } from "./auth-route";
 
 console.log('Home', Home)
 console.log('Location', Location)
@@ -19,8 +20,8 @@ const routes = [
         path: "/",
         exact: true,
         sidebar: () => Home.sidebarItem('/'),
-        component: Home.component,
-        authenticated: true
+        component: Login.component,
+        authenticated: false
     },
     {
         path: "/location",
@@ -37,15 +38,20 @@ const routes = [
 ];
 
 
-export  function Registry() {
-    return (routes.map((route, index) => (
-        <Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            children={<route.component />}
-        />
-    )))
+export function Registry() {
+    return (routes.map((route, index) =>
+        route.authenticated ?
+            (<AuthRoute
+                key={index}
+                path={route.path}
+                exact={route.exact}
+            ><route.component /> </AuthRoute>) :
+            (<Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+            ><route.component /></Route>)
+    ))
 }
 
 export function RouteList() {

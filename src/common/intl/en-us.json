@@ -1,0 +1,8 @@
+{
+    "login.username": "Username",
+    "login.username.placeholder": "Username",
+    "login.password": "Password",
+    "login.password.placeholder": "********",
+    "login.sigin": "Login",
+    "login.forgotPassord": "Forgot Passord"
+}
